@@ -1,0 +1,5 @@
+.DS_Store
+data/*
+.Rproj.user
+# All plots are not needed to upload.
+*.png 
