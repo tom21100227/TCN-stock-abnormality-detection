@@ -52,7 +52,7 @@ class Decoder(nn.Module):
 
 class tcnAutoencoder(nn.Module):
     def __init__(self, input_dim=(420, 2)):
-        super(ConvAutoencoder, self).__init__()
+        super(tcnAutoencoder, self).__init__()
         self.encoder = Encoder(input_size=input_dim[1], num_channels=[16, 32, 64], kernel_size=2, dropout=0.2)
         self.decoder = Decoder(input_size=64, num_channels=[64, 32, 16], kernel_size=2, dropout=0.2)
         
