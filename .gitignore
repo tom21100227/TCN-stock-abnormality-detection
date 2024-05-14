@@ -3,3 +3,5 @@ data/*
 .Rproj.user
 # All plots are not needed to upload.
 *.png 
+.ipynb_checkpoints/*
+__pycache__/*
