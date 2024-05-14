@@ -2,7 +2,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyverse)
 
-df <- read.csv("data/AAPL_1min_2024-03.csv")
+df <- read.csv("data/AAPL_1min_2024-02.csv")
 
 df$Date |> as.POSIXct(format = "%Y-%m-%d %H:%M:%S") -> df$Date
 
@@ -43,7 +43,7 @@ df |> mutate(Volume.adj = scale_value(Volume, min(Volume), max(Volume), min(Clos
 p_volume <- ggplot(df, aes(x = Date)) + geom_line(aes(y = Close), color = 'black') +
   geom_line(aes(y = Volume.adj), stat = "identity", color = "darkgreen", alpha = 0.5) +
   labs(title = "AAPL", x = "Time", y = "Close Price") +
-  theme_minimal() + 
+  theme_minimal() + geom_smooth(aes(y = Close), method = 'loess', color = "orange", span = 0.1, linewidth = 0.5) +
   facet_wrap(~format(Date, "%Y-%m-%d"), scales = "free_x") 
 p_volume
 
