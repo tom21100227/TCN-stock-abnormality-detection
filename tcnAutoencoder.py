@@ -71,9 +71,9 @@ class Decoder(nn.Module):
         return x
 
 class TCNAutoencoder(nn.Module):
-    def __init__(self, input_dim=(420, 2)):
+    def __init__(self, input_dim=(2, 18000)):
         super(TCNAutoencoder, self).__init__()
-        self.encoder = Encoder(input_size=input_dim[1], num_channels=[16, 16, 16, 16, 16, 16, 16], kernel_size=8)
+        self.encoder = Encoder(input_size=input_dim[0], num_channels=[16, 16, 16, 16, 16, 16, 16], kernel_size=8)
         self.decoder = Decoder(input_size=4, num_channels=[16, 16, 16, 16, 16, 16, 16], kernel_size=8)
         
     def forward(self, x):
