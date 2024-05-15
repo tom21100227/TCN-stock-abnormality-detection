@@ -48,7 +48,7 @@ class Encoder(nn.Module):
         self.tcn = TemporalConvNet(input_size, num_channels, kernel_size)
         # Pooling to reduce the size of the output to input_size // 32
         self.conv = nn.Conv1d(16 * len(num_channels), 4, 1)
-        self.pool = nn.AvgPool1d(kernel_size=35)
+        self.pool = nn.AvgPool1d(kernel_size=50)
         
     def forward(self, x):
         x = self.tcn(x)
@@ -60,7 +60,7 @@ class Decoder(nn.Module):
     def __init__(self, input_size, num_channels, kernel_size=2):
         super(Decoder, self).__init__()
         reversed_channels = num_channels[::-1]
-        self.upsample = nn.Upsample(scale_factor=35)
+        self.upsample = nn.Upsample(scale_factor=50)
         self.tcn = TemporalConvNet(input_size, reversed_channels, kernel_size, reverse = True)
         self.conv = nn.Conv1d(16 * len(num_channels), 2, 1)
 
