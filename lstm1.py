@@ -1,10 +1,15 @@
 import torch 
 import torch.nn as nn
 import numpy as np
+<<<<<<< Updated upstream
 import pandas as pd
 import torch.optim as optim
 import matplotlib.pyplot as plt
 import glob, os, re
+=======
+import torch.optim as optim
+import matplotlib.pyplot as plt
+>>>>>>> Stashed changes
 
 N = 100
 L = 1000
@@ -20,7 +25,11 @@ plt.legend()
 # plt.show()
 
 class LSTMPredictor(nn.Module):
+<<<<<<< Updated upstream
     def __init__(self, n_hidden = 10):
+=======
+    def __init__(self, n_hidden = 51):
+>>>>>>> Stashed changes
         super(LSTMPredictor, self).__init__()
         self.n_hidden = n_hidden
         self.lstm1 = nn.LSTMCell(1, self.n_hidden)
@@ -51,6 +60,7 @@ class LSTMPredictor(nn.Module):
         outputs = torch.cat(outputs, dim = 1)
         return outputs
     
+<<<<<<< Updated upstream
 
 def prepare_data():
     csv_files = glob.glob(os.path.join(".", "data", "hft_data", "*", "*_message_*.csv"))
@@ -103,6 +113,9 @@ def prepare_data():
 if __name__ == "__main__":
     dq_np = prepare_data()
     print(dq_np)
+=======
+if __name__ == "__main__":
+>>>>>>> Stashed changes
     x_train = torch.from_numpy(y[3:, :-1])
     y_train = torch.from_numpy(y[3:, 1:])
     x_test = torch.from_numpy(y[:3, :-1])

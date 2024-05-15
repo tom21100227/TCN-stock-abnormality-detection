@@ -55,21 +55,18 @@ def scale_dataframe(np_array):
 def torch_data_prepare(scaled_np_array, lookback):
     x = scaled_numpy[:, 1:]
     y = scaled_numpy[:, :1]
+
+    x = dc(np.flip(x, axis=1))
     print(x.shape, y.shape)
 
-    split_index = int(0.8 * len(scaled_numpy))
+    split_index = int(0.9 * len(scaled_numpy))
 
     x_train = x[:split_index]
     x_test = x[split_index:]
     y_train = y[:split_index]
     y_test = y[split_index:]
 
-    print(x_train.shape, x_test.shape, y_train.shape, y_test.shape)
-    x_train = x_train.reshape((-1, lookback, 1))
-    x_test = x_test.reshape((-1, lookback, 1))
-    y_train = y_train.reshape((-1, 1))
-    y_test = y_test.reshape((-1, 1))
-
+    
     x_train = torch.tensor(x_train).float()
     x_test = torch.tensor(x_test).float()
     y_train = torch.tensor(y_train).float()
