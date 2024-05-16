@@ -93,7 +93,6 @@ class LSTM(nn.Module):
         avg_loss_across_batches = running_loss / len(test_loader)
         
         print('Val Loss: {0:.3f}'.format(avg_loss_across_batches))
-        print('***************************************************')
         print()
     
     def train_one_epoch(self, epoch, train_loader):
@@ -134,5 +133,4 @@ class LSTM(nn.Module):
         avg_loss_across_batches = running_loss / len(test_loader)
         
         print('Val Loss: {0:.3f}'.format(avg_loss_across_batches))
-        print('***************************************************')
         print()

@@ -15,7 +15,7 @@ combined_data = pd.DataFrame()
 
 for i in range(4):
     for ticker in tickers:
-        data = yf.download(ticker, start=start[i], end=end[i], group_by="Ticker", period="max", interval="1m")
+        data = yf.download(ticker, start=start[i], end=end[i], group_by="Ticker", period="max", interval="1ms")
         data.to_csv(f'/Users/linguoren/Documents/GitHub/final_proj/{ticker}_{i}.csv', float_format='%.2f')
         df = pd.read_csv(f'/Users/linguoren/Documents/GitHub/final_proj/{ticker}_{i}.csv')
         combined_data = pd.concat([combined_data, df])

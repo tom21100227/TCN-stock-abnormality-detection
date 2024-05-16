@@ -1,10 +1,15 @@
 import torch 
 import torch.nn as nn
 import numpy as np
+<<<<<<< Updated upstream
 import pandas as pd
 import torch.optim as optim
 import matplotlib.pyplot as plt
 import glob, os, re
+=======
+import torch.optim as optim
+import matplotlib.pyplot as plt
+>>>>>>> Stashed changes
 
 N = 100
 L = 1000
@@ -20,7 +25,11 @@ plt.legend()
 # plt.show()
 
 class LSTMPredictor(nn.Module):
+<<<<<<< Updated upstream
     def __init__(self, n_hidden = 10):
+=======
+    def __init__(self, n_hidden = 51):
+>>>>>>> Stashed changes
         super(LSTMPredictor, self).__init__()
         self.n_hidden = n_hidden
         self.lstm1 = nn.LSTMCell(1, self.n_hidden)
@@ -51,13 +60,63 @@ class LSTMPredictor(nn.Module):
         outputs = torch.cat(outputs, dim = 1)
         return outputs
     
+<<<<<<< Updated upstream
 
+def prepare_data():
+    csv_files = glob.glob(os.path.join(".", "data", "hft_data", "*", "*_message_*.csv"))
+    date_str = re.compile(r'_(\d{4}-\d{2}-\d{2})_')
+    stock_str = re.compile(r'([A-Z]+)_\d{4}-\d{2}-\d{2}_')
 
+    df_list = []
+    day_list = []
+    sym_list = []
+
+    for csv_file in sorted(csv_files):
+        date = date_str.search(csv_file)
+        date = date.group(1)
+        day_list.append(date)
+
+        symbol = stock_str.search(csv_file)
+        symbol = symbol.group(1)
+        sym_list.append(symbol)
+
+        # Find the order book file that matches this message file.
+        book_file = csv_file.replace("message", "orderbook")
+
+        # Read the message file and index by timestamp.
+        df = pd.read_csv(csv_file, names=['Time','EventType','OrderID','Size','Price','Direction'])
+        df['Time'] = pd.to_datetime(date) + pd.to_timedelta(df['Time'], unit='s')
+
+        # Read the order book file and merge it with the messages.
+        names = [f"{x}{i}" for i in range(1,11) for x in ["AP","AS","BP","BS"]]
+        df = df.join(pd.read_csv(book_file, names=names), how='inner')
+        df = df.set_index(['Time'])
+
+        BBID_COL = df.columns.get_loc("BP1")
+        BASK_COL = df.columns.get_loc("AP1")
+
+        print (f"Read {df.shape[0]} unique order book shapshots from {csv_file}")
+        df_list.append(df)
+        
+
+        #prepare the data to be trained 
+        dq_df = df.loc[:, ['AP1', 'AS1', 'BP1', 'BS1']]
+        dq_df["AP1"] = dq_df["AP1"] / 10000
+        dq_df["BP1"] = dq_df["BP1"] / 10000
+        dq_df["mid_price"] = (dq_df['AP1'] + dq_df['BP1']) / 2
+        # print(dq_df)
+        # dq_np = dq_df.to_numpy()
+    return dq_np
+    
 
     
 if __name__ == "__main__":
     dq_np = prepare_data()
-    x_train = torch.from_numpy(y[3\:, :-1])
+    print(dq_np)
+=======
+if __name__ == "__main__":
+>>>>>>> Stashed changes
+    x_train = torch.from_numpy(y[3:, :-1])
     y_train = torch.from_numpy(y[3:, 1:])
     x_test = torch.from_numpy(y[:3, :-1])
     y_test = torch.from_numpy(y[:3, 1:])
