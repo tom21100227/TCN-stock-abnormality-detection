@@ -27,16 +27,20 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--ticker", default="*", type=str, help="Ticker value")
 parser.add_argument("--alias", type=str, help="Alias value")
 parser.add_argument("--epochs", type=int, help="Number of epochs to train the model")
+parser.add_argument("--snapshot-interval", default=500,type=int, help="The Script would take test error and model snapshot at given interval.")
 args = parser.parse_args()
 
 # Access the values of the arguments
 ticker = args.ticker
 alias = args.alias
 epochs = args.epochs
+snapshot_interval = args.snapshot_interval
 
 # Print the values for testing
 print("Ticker:", ticker)
 print("Alias:", alias)
+print("Epochs:", epochs)
+print("Snapshot Interval:", snapshot_interval)
 
 
 # In[3]:
@@ -247,9 +251,20 @@ for epoch in range(epochs):
         print(f"\t\tTest Loss: {test_loss.item()}")
         # save a model
         test_losses.append((epoch, test_loss.item()))
+        model.train()
+    if epoch % snapshot_interval == 0: 
+        model.eval()
+        check_gradients(model)
+        test_data = torch.cat(tensors_test, dim=0).to(device)
+        test_output = model(test_data)
+        test_loss = criterion(test_output, test_data)
+        print(f"\t\tTest Loss: {test_loss.item()}")
+        # save a model
+        test_losses.append((epoch, test_loss.item()))
+        model.train()
         torch.save(model.state_dict(), f"{alias}_model_epoch_{epoch}.plt")
         print(f"Model saved as {alias}_model_epoch_{epoch}.plt")
-        model.train()
+        
 
 
 # final OOS test
