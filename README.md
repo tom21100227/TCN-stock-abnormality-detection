@@ -1,4 +1,15 @@
-# [Title Undecided]
+# Abnormality Detection in Stock Market with Unsupervised Learning
 
-## Intro
-This is the final group project for Spring 2024's CSCI 3456 Financial Machine Learning in Bowdoin College. 
+> 🪼Kaylie’s only friends:otter: : Tom Han and Linguo Ren
+
+## File Structure
+
+ - `eda/*`: Exploratory Data Analysis, including all the R code used for this project
+ - `tcnAutoencoder.py`: The actual implementation of TCN-Autoencoder in PyTorch.
+ - `test_TCN.py`: Validation for if `tcnAutoencoder` is working.
+ - `run_tcnAE.*`: Different scripts to train TCN-AE on HPC and our macbook.
+ - `make_figures.ipynb`: used to generate some figures in the poster.
+ - `api.py`: Getting data from various sources.
+ - `clustering*`: Codes used to run the clustering algorithm.
+ - `data`: A symlink that links to the `hft_data` location on Bowdoin's HPC, would not work locally.
+ - `archive/*`: unused script that were a part of this project. 
