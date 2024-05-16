@@ -5,3 +5,4 @@ data/*
 *.png 
 .ipynb_checkpoints/*
 __pycache__/*
+*.plt
