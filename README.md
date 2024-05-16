@@ -14,3 +14,11 @@
  - `clustering*`: Codes used to run the clustering algorithm.
  - `data`: A symlink that links to the `hft_data` location on Bowdoin's HPC, would not work locally.
  - `archive/*`: unused script that were a part of this project. 
+
+## Getting started: 
+
+1. Download the actual HFT data from lobster or create a working version of the symlink pointing to microwave.
+2. Start with `run_tcnAE.ipynb`, it should load the data, preprocess and train the model for 1000 epoch by default
+3. Get creative!
+
+> Please note that when I run the script on my computer it took up 16 GB of memory. You've been warned. 
