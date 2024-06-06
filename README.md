@@ -1,5 +1,7 @@
 # Abnormality Detection in Stock Market with Unsupervised Learning
 
+This repo is the Final Project submission for Bowdoin College's CSCI 3465 Financial Machine Learning in Spring 2024 by Tom Han and Linguo Ren. For project description, please [refer to the poster attached in the repo.](./poster.pdf)
+
 > 🪼Kaylie’s only friends🦦 : Tom Han and Linguo Ren
 
 ## File Structure
