@@ -1,10 +1,12 @@
 .DS_Store
 data/*
+*.RData
 .Rproj.user
-# All plots are not needed to upload.
-*.png 
+# All plots are not needed in actual commit.
+*.png
 .ipynb_checkpoints/*
 __pycache__/*
 *.plt
+models/*
 *.out
-data*
+__MACOSX/*
